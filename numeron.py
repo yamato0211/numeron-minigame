@@ -12,7 +12,7 @@ game = {
 
 def create_problems():
     while len(numeron_ans) < 3:
-        ran = random.randrange(1, 10)
+        ran = random.randint(1,9)
         if ran not in numeron_ans:
             numeron_ans.append(ran)
 
