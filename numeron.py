@@ -5,19 +5,19 @@ count = 10
 eat = 0
 bite = 0
 game = {
-    "finish": True,
+    "finish": False,
     "count": count
 }
 
 
 def create_problems():
     while len(numeron_ans) < 3:
-        ran = random.randint(1,9)
+        ran = random.randint(1, 9)
         if ran not in numeron_ans:
             numeron_ans.append(ran)
 
 
-def check_your_answer(eat, bite, count):
+def check_your_answer(eat, bite, count, player_ans, numeron_ans):
     for i in range(3):
         for j in range(3):
             if player_ans[i] == numeron_ans[j]:
@@ -29,17 +29,17 @@ def check_your_answer(eat, bite, count):
     if eat == 3:
         print("クリア")
         print("----------------------------------------------------------------")
-        return {"finish": False, "count": count}
+        return {"finish": True, "count": count}
     else:
         print(f"{eat}eat,{bite}bite")
         count -= 1
         if count == 0:
             print("失敗です")
             print("----------------------------------------------------------------")
-            return {"finish": False, "count": count}
+            return {"finish": True, "count": count}
         else:
             print("----------------------------------------------------------------")
-            return {"finish": True, "count": count}
+            return {"finish": False, "count": count}
 
 
 print("ルール説明")
@@ -53,7 +53,7 @@ print("----------------------------------------------------------------")
 
 create_problems()
 
-while game["finish"]:
+while not game["finish"]:
     print(f"重複しない3桁の数字(1~9)を入力してください")
     num = int(input("残り" + str(game["count"]) + "回: "))
     player_ans = [int(a) for a in str(num)]
@@ -65,4 +65,4 @@ while game["finish"]:
         print("重複しない3桁の整数を入力してください。")
         print("----------------------------------------------------------------")
         continue
-    game = check_your_answer(eat, bite, game["count"])
+    game = check_your_answer(eat, bite, game["count"], player_ans, numeron_ans)

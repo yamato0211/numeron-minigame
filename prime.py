@@ -1,5 +1,4 @@
 
-
 prime_array = []
 num = 2
 
